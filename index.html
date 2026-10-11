@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090e1a">
+  <meta name="description" content="A tiny space arcade game. Dodge meteors, collect stars, and beat your best flight. Play offline with keyboard, mouse, or touch.">
+  <title>Meteor Dodge — Keep Flying</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090e1a'/%3E%3Cpath d='M32 10 48 48 32 40 16 48Z' fill='%23c4f76a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span> LITTLE SPACE ARCADE</div>
+      <button id="sound-button" class="sound-button" type="button" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path id="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" hidden/><path id="sound-slash" d="m16 9 5 6m0-6-5 6"/></svg>
+        <span id="sound-label">Sound off</span>
+      </button>
+    </header>
+
+    <main>
+      <div class="game-heading">
+        <div><p class="eyebrow">SMALL SHIP. BIG SKY.</p><h1>METEOR <span>DODGE.</span></h1></div>
+        <p class="game-tagline">Catch stars. Dodge trouble.<br>Make your next flight your best.</p>
+      </div>
+
+      <section class="dashboard" aria-label="Flight statistics">
+        <div class="stat"><span class="stat-label">SCORE</span><strong id="score">0000</strong></div>
+        <div class="stat"><span class="stat-label">PERSONAL BEST</span><strong id="best">0000</strong></div>
+        <div class="stat"><span class="stat-label">FLIGHT TIME</span><strong id="time">0:00</strong></div>
+        <div class="stat lives-stat"><span class="stat-label">LIVES LEFT</span><strong id="lives" aria-label="3 lives"><span>♥</span><span>♥</span><span>♥</span></strong></div>
+      </section>
+
+      <section id="stage" class="stage" data-state="ready" aria-label="Meteor Dodge">
+        <canvas id="game-canvas" width="960" height="540" tabindex="0" aria-label="Game area. Move with left and right arrow keys or A and D. Press Space to pause."></canvas>
+        <div class="stage-top"><span id="sector">SECTOR 01</span><button id="pause-button" type="button" class="pause-button" disabled aria-label="Pause game"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12" stroke="currentColor" stroke-width="3"/></svg><span>Pause</span></button></div>
+
+        <div id="overlay" class="overlay">
+          <section id="ready-panel" class="overlay-panel">
+            <div class="orbit-mark" aria-hidden="true"><svg viewBox="0 0 90 90"><ellipse cx="45" cy="45" rx="42" ry="25" transform="rotate(-25 45 45)" fill="none" stroke="#c4f76a" stroke-opacity=".25"/><path d="m45 18 17 47-17-10-17 10Z" fill="#e6f3ff"/><path d="m45 28 6 21H39Z" fill="#72dcff"/><path d="m40 61 5 15 5-15" fill="#c4f76a"/><circle cx="79" cy="24" r="4" fill="#c4f76a"/></svg></div>
+            <p class="eyebrow">READY, PILOT?</p>
+            <h2>Stay sharp.<br>Keep flying.</h2>
+            <p class="overlay-copy">Dodge the meteors. Catch the glowing stars.<br>Three lives. One more try.</p>
+            <button id="start-button" class="primary-button" type="button">Launch flight <span aria-hidden="true">↗</span></button>
+            <p class="start-hint">or press <kbd>Space</kbd></p>
+          </section>
+
+          <section id="paused-panel" class="overlay-panel" hidden>
+            <p class="eyebrow">TAKE A BREATHER</p><h2>Flight paused.</h2>
+            <p class="overlay-copy">The sky can wait. Your score is safe.</p>
+            <button id="resume-button" class="primary-button" type="button">Keep flying <span aria-hidden="true">↗</span></button>
+            <button id="restart-button" class="text-button" type="button">Start a new flight</button>
+          </section>
+
+          <section id="gameover-panel" class="overlay-panel" hidden>
+            <p class="eyebrow">FLIGHT COMPLETE</p><h2>Nice flying.</h2>
+            <div class="final-score" id="final-score">0</div><p class="final-score-label">POINTS EARNED</p>
+            <p id="result-message" class="result-message">Let's give that sky another go.</p>
+            <button id="again-button" class="primary-button" type="button">Fly again <span aria-hidden="true">↗</span></button>
+            <button id="menu-button" class="text-button" type="button">Back to the hangar</button>
+          </section>
+        </div>
+        <div class="stage-bottom" aria-hidden="true"><span class="flight-indicator"></span><span id="flight-status">AWAITING LAUNCH</span><span>✦ +25 / STAR</span></div>
+      </section>
+
+      <footer class="game-footer"><div><kbd>←</kbd><kbd>→</kbd><span>or</span><kbd>A</kbd><kbd>D</kbd><span>to steer</span></div><div><span class="control-dot"></span><span>Move your mouse or drag to steer</span></div><div><kbd>Space</kbd><span>to pause</span></div></footer>
+      <p class="footer-note">A little space. A lot of reflexes.</p>
+      <p id="announcement" class="sr-only" aria-live="polite"></p>
+      <noscript><p class="noscript-message">Enable JavaScript in your browser to play Meteor Dodge.</p></noscript>
+    </main>
+  </div>
+</body>
+</html>
